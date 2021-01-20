@@ -1,0 +1,74 @@
+{% extends 'store/main.html' %}
+{% block content %}
+    {% load static %}
+    <body>
+    <h5 style="color: greenyellow"><br><br></h5>
+    <div class="col-sm-6">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if "html_safe" in message.tags %} {{ message |safe }} {% else %} {{ message }} {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div class="container-fluid">
+        <div class='col-sm-6 col-sm-offset-3'>
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}" alt="" class="img-responsive">
+            {% endif %}
+            <h1>{{ name| truncatechars:10 }}
+                <small>{{ instance.price }} /元</small>
+            </h1>
+
+            <small>{{ instance.content }}</small>
+            <small>{{ instance.digital }}</small>
+
+            <p>Author : {{ user }}</p>
+
+            {{ instance.id }}<br>
+            {% url 'posts:detail' id=instance.id %}<br>
+            <a href="{{ instance.images }}"></a>{{ instance.name }}<br>
+
+            <p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+                    Facebook
+                </a>
+                <a href="https://twitter.com/home?status={{ instance.name | truncatechars:20 }}%20{{ request.build_absolute_uri }}">
+                    Twitter
+                </a>
+                <a href='https://plus.google.com/share?url=http://codingforentrepreneurs.com'>Google+</a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source=http://swiftforentrepreneurs.com/">
+                    Linkedin
+                </a>
+                <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
+                <a data-pin-do="buttonBookmark"
+                   href="//www.pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}">
+                    <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"/>
+                </a>
+            </p>
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-1">
+                    {{ instance.content|linebreaks|truncatechars:20 }}<br>
+                    <hr>
+                    <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-width=""
+                         data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+                    {#                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}"#}
+                    {#                         data-numposts="5" data-width=""></div>#}
+                </div>
+            </div>
+            <div class='col-sm-6 col-sm-offset-3'>
+                <a href="{% url 'store:update' id=instance.id %}">Edit/update Product</a><br>
+                <a href="{% url 'store:delete' id=instance.id %}">Del Product</a><br>
+{#                <a href="{% url 'store:list' %}">Product</a><br>#}
+            </div>
+        </div>
+
+
+    </div>
+
+    </body>
+
+{% endblock %}

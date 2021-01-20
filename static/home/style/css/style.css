@@ -1,0 +1,226 @@
+*, ul, li, a{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    /*outline: red solid 1px;*/
+}
+
+html {
+    /*font-size: 1rem!important;*/
+}
+
+/* sidebar menu start */
+.featured-posts {
+    margin-top: 50px;
+    position: relative;
+}
+
+.heading {
+    text-align: left;
+    color: #333;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif;
+    line-height: 1.35715;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    outline: slategrey solid 1px;
+}
+
+.featured-posts .heading h2 {
+    font-size: 19px;
+    color: #fff;
+    border-bottom: 1px solid #2d2e39;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.dx-theme-generic-typography .dx-font-l, .dx-theme-generic-typography h2 {
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+}
+
+/* / . sidebar menu end */
+/* sidebar start */
+.owl-dots {
+    position: absolute;
+    top: -50px;
+    left: 128px;
+    width: 70px;
+    /*border: 1px solid #00b44e!important;*/
+    height: 17px;
+}
+
+.button.owl-dot {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+}
+
+.owl-dot.active {
+    background-color: #24242d !important;
+}
+
+.button.owl-dot {
+    width: 20px;
+    height: 10px;
+    background-color: #c0c0c3 !important;
+    margin-left: 5px;
+    outline: none;
+}
+
+.button {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    background-color: transparent !important;
+    display: inline-block !important;
+    padding: 8px 20px !important;
+    border: 2px solid #d5d5d7 !important;
+    transition: all 0.5s !important;
+}
+
+/* content start */
+.bg-gradient-info {
+    background: #5a6268 !important;
+}
+
+.navbar-nav .nav-link {
+    /*padding-right: 0;*/
+    /*padding-left: 0;*/
+    /*color: wheat;*/
+    color: #fff;
+}
+
+/* content end */
+
+/* footer start */
+#footer .copyright {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 25px;
+    color: #7a7a7a;
+    letter-spacing: .2px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/*user agent stylesheet*/
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+/* footer end */
+
+/*-----------------------------------------------------------------product-----------------------------------------------------------------------*/
+/*Horizontal scrolling table with Fixed first column start*/
+table {
+    border-collapse: collapse;
+    width: 500px;
+    overflow-x: scroll;
+    display: block;
+}
+thead {
+    background-color: #EFEFEF;
+}
+thead, tbody {
+    display: block;
+}
+tbody {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px;
+}
+section table td, section table th {
+    min-width: 300px;
+    height: 25px;
+    border: dashed 1px lightblue;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+section table tr{
+    font-size: 13px;
+}
+/*Horizontal scrolling table with Fixed first column end*/
+/*-----------------------------------------------------------------product-----------------------------------------------------------------------*/
+
+/**/
+.dx-datagrid-header-panel {
+    border-bottom: 1px solid #ddd;
+}
+.dx-datagrid-header-panel {
+    text-align: left;
+}
+
+.dx-datagrid-header-panel .dx-toolbar {
+    margin-bottom: 10px;
+}
+.dx-widget, .dx-widget *, .dx-widget :after, .dx-widget :before, .dx-widget:after, .dx-widget:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.dx-toolbar {
+    width: 100%;
+}
+
+.dx-widget {
+    color: #333;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Helvetica Neue','Segoe UI',Helvetica,Verdana,sans-serif;
+    line-height: 1.35715;
+}
+.dx-toolbar {
+    background-color: #fff;
+    color: #333;
+    padding: 0;
+    overflow: visible;
+}
+
+.dx-toolbar .dx-toolbar-items-container {
+    height: 36px;
+    overflow: visible;
+    background-color: #f4f6f9;
+}
+
+toolbar-before:empty {
+    padding: 0;
+}
+
+.dx-toolbar-center:empty {
+    display: none;
+        margin: 0 auto;
+    float: none;
+}
+
+.dx-toolbar .dx-toolbar-after {
+    padding-left: 15px;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------------*/
+/* from 表格 start */
+form#formset fieldset legend {
+    font-weight: bold;
+    color: #fff;
+    padding:0 0.5em;
+}

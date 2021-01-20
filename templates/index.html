@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block keywords %} my home page keywords {% endblock %}
+{% block descriptions %} my home page descriptions {% endblock %}
+
+{#{% include 'home/header.html' %}#}
+{% block sidebar %} {% include 'home/sidebar.html' %} {% endblock %}
+{% block navbar  %} {% include 'home/navbar.html'  %} {% endblock %}
+{% block content %} {% include 'home/content.html' %} {% endblock %}
+{% block footer  %} {% include 'home/footer.html'  %} {% endblock %}

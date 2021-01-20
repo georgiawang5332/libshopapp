@@ -1,0 +1,9 @@
+
+<body>
+<h1>Form</h1>
+<form action="{% url 'posts:create' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create Save Post">
+</form>
+</body>
+

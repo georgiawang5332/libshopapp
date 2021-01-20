@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1>Search Result Found: 總共{{ searchNum }}筆</h1>
+        </div>
+        <div class="row">
+            {% if product %}
+                {% for i in product %}
+                    <div class="col-lg-4">
+                        {% if i.image %}
+                            <img class="thumbnail" src="{{ i.image.url }}">
+                        {% endif %}
+                        <div class="box-element product">
+                            <h6><strong><a href="{{ i.get_absolute_url }}">{{ i.name }}</a></strong></h6>
+                            <h2><a href="/store/{{ i.id }}">{{ i.name }} : {{ i.content }}</a></h2>
+
+                            <hr>
+
+                            <button data-product="{{ i.id }}" data-action="add"
+                                    class="btn btn-outline-secondary add-btn update-cart">Add to Cart
+                            </button>
+
+                            <a class="btn btn-outline-success" href="{% url 'store:detail' id=i.id %}">View</a>
+                            <h4 style="display: inline-block; float: right"><strong>${{ i.price }}</strong></h4>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+
+                <h1>nothing found bitch!</h1>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock content %}

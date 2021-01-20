@@ -1,0 +1,126 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>base_gen 給不是特別需要畫面頁面</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'home/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!--Ramayana CSS Template https://templatemo.com/tm-529-ramayana-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'home/assets/css/fontawesome.css' %}">
+
+    {# index.css 修改畫面 #}
+    <link rel="stylesheet" href="{% static 'home/style/css/login.css' %}">
+</head>
+<body style="background-color: #e1dcd9;">
+{% block content %}
+
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    {#    <form method="post" action="{% url 'login' %}">#}
+    {#        {% csrf_token %}#}
+    {#        <table>#}
+    {#            <tr>#}
+    {#                <td>{{ form.username.label_tag }}</td>#}
+    {#                <td>{{ form.username }}</td>#}
+    {#            </tr>#}
+    {#            <tr>#}
+    {#                <td>{{ form.password.label_tag }}</td>#}
+    {#                <td>{{ form.password }}</td>#}
+    {#            </tr>#}
+    {#        </table>#}
+    {##}
+    {#        <input type="submit" value="login"/>#}
+    {#        <input type="hidden" name="next" value="{{ next }}"/>#}
+    {#    </form>#}
+
+    {#    -------------------------------------------------------------------------------------------#}
+    <!--login會員登入-->
+    <form class="login" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {#        <div id="left" class="one-thirds"></div><!--one-thirds-->#}
+        <div id="right" class="w-100">
+            <fieldset>
+                <!--<div class="fie">-->
+                <h1 class="lgd" style=" text-align:center;line-height:50px;">登入帳號</h1>
+                <hr>
+                <p>直接輸入您的 **** 會員帳號密碼登入網站</p>
+                <!--1--><label for="username">{{ form.username.label_tag }}</label><input type="text" id="username"
+                                                                                          class="username_email"
+                                                                                          name="username"
+                                                                                          placeholder="使用者名稱" required>
+                <br>
+                <!--2--><label for="password">{{ form.password.label_tag }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input
+                    type="password" id="password" class="password1" name="password" placeholder="密碼" required>
+                <br>
+                {#              <!--3--><input type="button" value="登入" class="btn btn-dark float-right text-lg-center" id="submit" onclick="myFormCheck()"/>#}
+                <div class="form-group">
+                    <input type="submit" value="login" class="btn btn-lg btn-primary btn-block">
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </div>
+                <!--4-->
+                <div id="extra_remember" class=""><!--rmbr-->
+                    <!--4.1--> <input type="checkbox" id="remberme" name="remberme" required>
+                    <!--4.2--> <label for="remberme" id="remberme0">記住我</label>
+                </div>
+                <div id="extra_operation"><!--sign-->
+                    <a href="{% url 'password_reset' %}" id="member_btn">忘記密碼?</a>
+                    <a href="javascript:;" id="register">註冊</a>
+                </div>
+                <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p>
+                <div class="img_btn">
+{#                    <div style="width:100%; float: left">#}
+                    <div class="c_btn facebook-btn fb" style="width: 33.3%; text-align:center;line-height:1rem;">
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="c_btn google-btn go" style="width: 33.3%; text-align:center;line-height:1rem;">
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="c_btn google-btn go" style="width: 33.3%; text-align:center;line-height:1rem;">
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+                    </div>
+{#                        </div>#}
+                </div>
+                <!--</div>-->
+            </fieldset>
+        </div><!--two-thirds-->
+    </form>
+
+
+    {#    -------------------------------------------------------------------------------------------#}
+
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    {#    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
+
+    {#    {% include 'home/footer.html' %}#}
+{% endblock %}
+
+
+
+{#C:\Users\georgiawang\Documents\projectAll8\libmaster\lishop_e\Lib\site-packages\django\contrib\admin\templates\registration#}
+
+</body>
+</html>

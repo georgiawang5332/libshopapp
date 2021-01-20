@@ -1,0 +1,102 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    {% load static %}
+
+    {#    {% if post_list %}#}
+    <div class="col-sm-12">
+        <a href="{% url 'home:index' %}" class="pt-5 text-danger bg-dark text-decoration-none">返回首頁</a>
+    </div>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <h1> {{ title }} is working! </h1>
+
+        <form method='GET' action=''>{# 不要亂添加 #}
+            {% csrf_token %}
+            <a href="{% url 'posts:create' %}">Create Post</a>
+            <br><br>
+            <input type='text' name='q' placeholder='Search Posts' value='{{ request.GET.q }}' id="id_q"
+                   class=""/>{# form-control #}
+            <input type='submit' value='Search'/>
+        </form>
+
+        {#{% url 'detail' id=obj.id %}#}
+        {% for obj in object_list %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                        <h1>{{ obj.id }}<br></h1>
+                        {% if obj.img %}
+                            <img src="{{ obj.img.url }}" class="img-responsive" alt="">
+                        {% endif %}
+                        /posts/id
+
+                        <div class="caption">
+                            {% if obj.draft %}<h5>Staff Only: Draft</h5>{% if obj.publish > today %}
+                                <h5>STAFF ONLY: Future Post </h5> {% endif %}{% endif %}
+                            <h3>
+                                <a href="{{ obj.get_absolute_url }}">{{ obj.title|truncatechars:10 }}<br><small>{{ obj.publish }}ago</small></a>
+                            </h3>
+                            {#                            {{ obj.publish }} ago  {{ obj.timestamp|timesince }} ago#}
+                            {% url "posts:detail" id=obj.id %}
+                            {# 1.  id=obj.id => /posts/id  2."{% url 'detail' id=obj.id %}"   3. 因get_absoulute_url return reverse('posts:detail')  so  "{% url 'post:detail' id=obj.id %}"#}
+                            {% if user.get_full_name %}
+                                <p>Author: {{ user.get_full_name }}</p>
+                            {% endif %}
+                            <a href="{{ obj.get_absolute_url }}">{{ obj.title | truncatechars:20 }}</a><br>
+                            {#<a href="{% url 'posts:detail' id=obj.id %}">{{ obj.title }}<br></a>#}
+                            {{ obj.content | linebreaks | truncatechars:80 }}<br>
+                            {{ obj.timestamp }}<br>
+                            {{ obj.updated }}<br>
+
+                            {#                            {% if obj.img %}#}
+                            {#                                <img src="{{ obj.img.url }}" alt="" class="img-responsive">#}
+                            {#                            {% endif %}#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        {#--pagination--#}
+        <div class="pagination">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_reguest_var }}=1">&laquo; first</a>
+                    <a href="?{{ page_reguest_var }}=
+
+                            {{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?{{ page_reguest_var }}=
+                            {{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    <a href="?{{ page_reguest_var }}={{ object_list.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {# /* --pagination--#}
+
+    </div>
+
+    {#    {% else %}#}
+    {#    <div class="container">#}
+    {#        <div class="row">#}
+    {#            <div class="card m_auto">#}
+    {#                <div class="card-body mt-2 mb-2">#}
+    {#                    <h2 class="card-title">NO RESULTS</h2>#}
+    {#                    <div class="card-text">There were no results matching your search: "{{ query }}".</div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    {% endif %}#}
+
+{% endblock content %}
+
+<script type="text/javascript">
+    document.getElementById("id_q").value = "{{query}}"
+</script>

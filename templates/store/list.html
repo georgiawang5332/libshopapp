@@ -1,0 +1,49 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+            {# /store/id#}
+            <div class="col-lg-4">
+                {% if product.image %}
+                    <img class="thumbnail" src="{{ product.image.url }}">
+                {% endif %}
+                <div class="box-element product">
+                    {#                    <h6><strong><a href="{% url 'store:detail' id=product.id %}">{{ product.name }}</a></strong></h6>#}
+                    <h6><strong><a href="{{ product.get_absolute_url }}">{{ product.name }}</a><small>{{ product.timestamp|timesince }} ago</small></strong></h6>
+                    <hr>
+
+                    <button data-product="{{ product.id }}" data-action="add"
+                            class="btn btn-outline-secondary add-btn update-cart">Add to Cart
+                    </button>
+
+                    <a class="btn btn-outline-success" href="{% url 'store:detail' id=product.id %}">View</a>
+                    <h4 style="display: inline-block; float: right"><strong>${{ product.price }}</strong></h4>
+
+                </div>
+            </div>
+        {% endfor %}
+
+        {#--pagination--#}
+        <div class="pagination">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                    <a href="?{{ page_reguest_var }}=1">&laquo; first</a>
+                    <a href="?{{ page_reguest_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+
+                {% if object_list.has_next %}
+                    <a href="?{{ page_reguest_var }}=
+                            {{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                    <a href="?{{ page_reguest_var }}={{ object_list.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {# /* --pagination--#}
+    </div>
+
+{% endblock content %}

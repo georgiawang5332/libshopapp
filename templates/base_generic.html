@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    {% include 'home/head.html' %}
+    <title>{% block title %} home base page{% endblock %}</title>
+</head>
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    {% block navbar %} {% endblock %}
+    {% block sidebar %} {% endblock %}
+    {% block content %} {% endblock %}
+    {% block controlSidebar %} {% endblock %}
+    {% block footer %} {% endblock %}
+</div>
+{% include 'home/scripts.html' %}
+
+</body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v8.0" nonce="5IUX5p2e"></script>
+
+
+</html>

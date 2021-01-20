@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="productSearch.views.productSearchView.objects" />
+          <option value="core.views.productSearchView.objects" />
+          <option value="super.form_valid" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
