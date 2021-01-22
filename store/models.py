@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 
 
@@ -12,16 +12,24 @@ class Customer(models.Model):
         return str(self.name)
 
 
+def imgs(instance, filename):
+    return "%s/%s" % (instance.id, filename)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
     content = models.TextField(default='')
     price = models.DecimalField(max_digits=7, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(
-        upload_to='imgs',
+        upload_to=imgs,
         null=True,
-        blank=True
+        blank=True,
+        width_field="width_field",
+        height_field="height_field"
     )
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -44,6 +52,7 @@ class Product(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
