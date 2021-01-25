@@ -13,6 +13,19 @@
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+    {#alert訊息資訊#}
+    {#    <div class="mt-5 pt-4">#}
+    {#        {% if messages %}#}
+    {#            {% for message in messages %}#}
+    {#                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">#}
+    {#                    {{ message }}#}
+    {#                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+    {#                        <span aria-hidden="true">&times;</span>#}
+    {#                    </button>#}
+    {#                </div>#}
+    {#            {% endfor %}#}
+    {#        {% endif %}#}
+    {#    </div>#}
     {% block navbar %} {% endblock %}
     {% block sidebar %} {% endblock %}
     {% block content %} {% endblock %}
@@ -23,7 +36,8 @@
 
 </body>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v8.0" nonce="5IUX5p2e"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v8.0"
+        nonce="5IUX5p2e"></script>
 
 
 </html>

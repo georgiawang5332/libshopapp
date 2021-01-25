@@ -1,15 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse, HttpResponseRedirect, Http404
-from django.contrib import messages
-import json
 import datetime
+import json
 
-from .models import *
-from .utils import cookieCart, cartData, guestOrder
-from .models import Product
-from .forms import ProductForms
-
+from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import JsonResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from .forms import ProductForms
+from .models import *
+from .models import Product
+from .utils import cartData, guestOrder
 
 
 def productCreate(request):
@@ -38,23 +38,65 @@ def productCreate(request):
     return render(request, "store/form.html", context)
 
 
+# def productUpdate(request, id=None):
+#     # basic use permissions 基本使用權限
+#     if not request.user.is_staff or not request.user.is_superuser:
+#         raise Http404
+#
+#     context = {}
+#     if request.POST:
+#         form = ProductForms(request.POST)
+#         if form.is_valid():
+#             instance = get_object_or_404(Product, id=id)
+#             form = ProductForms(data=request.POST, instance=instance)
+#             form.save()
+#             # updating our context
+#             context.update({'instance': instance})
+#             # message success
+#             messages.success(request, "<a href='#'>Item</a> Saved",
+#                              extra_tags='html_safe')
+#             return HttpResponseRedirect(instance.get_absolute_url())
+#
+#     else:
+#         form = ProductForms()  # if request isn't POST we initialize an empty form
+#
+#     data = cartData(request)
+#     cartItems = data['cartItems']
+#
+#     context.update({
+#         'form': form,
+#         'cartItems': cartItems,
+#     })
+#     return render(request, 'store/form.html', context)
+
+
+# def productUpdate(request, id=id):
+#     if request.method == 'POST':
+#         instance = Product.objects.get(Product, id=id)
+#         form = ProductForms(request.POST or None, instance=instance)
+#         if request.method == 'POST':
+#             form = ProductForms(request.POST, instance=instance)
+#             if form.is_valid():
+#                 form.save()
+#                 # return HttpResponseRedirect(instance.get_absolute_url())
+#                 return redirect('/')
+
 def productUpdate(request, id=None):
-    # basic use permissions 基本使用權限
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+    # 購物車購買數量
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    # if not request.user.is_staff or not request.user.is_superuser:
+    #     raise Http404
 
     instance = get_object_or_404(Product, id=id)
-    form = ProductForms(request.POST or None, request.FILES or None, instance=instance)
+    form = ProductForms(request.POST or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
         # message success
         messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
-
-    # 購物車購買數量
-    data = cartData(request)
-    cartItems = data['cartItems']
 
     context = {
         'instance': instance,
