@@ -95,8 +95,18 @@ def productUpdate(request, id=None):
         instance = form.save(commit=False)
         instance.save()
         # message success
-        messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
+        # messages.info(request, 'this is a info message!')
+        # messages.error(request, 'ERROR!ERROR!')
+        # messages.warning(request, 'Be careful!!!')
+        messages.success(request,
+                         "<div id='msg' class='alert alert-success col-lg-12' role='alert'><strong>Success!</strong>Success Saved thank you for add join.</div>",
+                         extra_tags='html_safe')
+        # messages.success(request, "<a href='#'><strong>疑問通知</strong></a> Success Saved thank you for add join", extra_tags='html_safe')
+        # messages.success(request,"{% if messages %}<div class='row'><div class='col-sm-6 col-sm-offset-3'>{% for message in messages %}<div class='alert alert-{{ message.tags }} alert-dismissible fade show' role='alert'>{{ message }}<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>{% endfor %}</div></div>{% endif %}", extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
+    # else:
+    #     #error message success
+    #     messages.success(request, "<a href='#'>通知作者</a> 錯誤儲存 ", extra_tags='html_safe')
 
     context = {
         'instance': instance,
