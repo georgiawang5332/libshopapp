@@ -3,7 +3,7 @@ from store.models import *
 
 # Register your models here.
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'content', 'price', 'digital', 'image', "updated", "timestamp"]
+    list_display = ['id', 'name', 'content', 'price', 'digital', 'image', "updated", "timestamp"]
     search_fields = ["name", "content"]
     list_display_links = ["updated"]
     list_editable = ["name"]

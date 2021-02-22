@@ -84,25 +84,25 @@ def posts_list(request):  # list items
         ).distinct()
 
     # paginator 分頁
-    paginator = Paginator(queryset_list, 35)  # Show 25 contacts per page.
+    # paginator = Paginator(queryset_list, 35)  # Show 25 contacts per page.
 
-    page_reguest_var = "page"
-    page = request.GET.get(page_reguest_var)
-
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        #     if page is not an intrger, deliver first page.
-        queryset = paginator.page(1)
-    except EmptyPage:
-        #     if page out of range(e.g. 9999), deliver last page of request
-        queryset = paginator.page(paginator.num_pages)
+    # page_reguest_var = "page"
+    # page = request.GET.get(page_reguest_var)
+    #
+    # try:
+    #     queryset = paginator.page(page)
+    # except PageNotAnInteger:
+    #     #     if page is not an intrger, deliver first page.
+    #     queryset = paginator.page(1)
+    # except EmptyPage:
+    #     #     if page out of range(e.g. 9999), deliver last page of request
+    #     queryset = paginator.page(paginator.num_pages)
 
     context = {
-        'object_list': queryset,
-        'title': 'List',
-        'page_reguest_var': page_reguest_var,
-        'today': today,
+        # 'object_list': queryset,
+        # 'title': 'List',
+        # 'page_reguest_var': page_reguest_var,
+        # 'today': today,
     }
     return render(request, 'posts/post_list.html', context)
 

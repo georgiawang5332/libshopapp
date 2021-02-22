@@ -8,24 +8,25 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ProductForms
 from .models import *
-from .models import Product
 from .utils import cartData, guestOrder
 
+from django.utils import timezone
 
 def productCreate(request):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-
+    # if not request.user.is_staff or not request.user.is_superuser:
+    #     raise Http404
     form = ProductForms(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
         instance.save()  # 這樣就可以儲存了
         # message success
-        messages.success(request, "Successfully Created")
+        messages.success(request,
+                         "<div id='msg' class='alert alert-success' role='alert'><strong>Success!</strong>Successfully Created.</div>",
+                         extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request, "Not successfully Created")
+    # else:
+        # messages.error(request, "Not successfully Created")
 
     # 購物車購買數量
     data = cartData(request)
@@ -35,51 +36,8 @@ def productCreate(request):
         "form": form,
         'cartItems': cartItems,
     }
-    return render(request, "store/form.html", context)
+    return render(request, 'store/form.html', context)
 
-
-# def productUpdate(request, id=None):
-#     # basic use permissions 基本使用權限
-#     if not request.user.is_staff or not request.user.is_superuser:
-#         raise Http404
-#
-#     context = {}
-#     if request.POST:
-#         form = ProductForms(request.POST)
-#         if form.is_valid():
-#             instance = get_object_or_404(Product, id=id)
-#             form = ProductForms(data=request.POST, instance=instance)
-#             form.save()
-#             # updating our context
-#             context.update({'instance': instance})
-#             # message success
-#             messages.success(request, "<a href='#'>Item</a> Saved",
-#                              extra_tags='html_safe')
-#             return HttpResponseRedirect(instance.get_absolute_url())
-#
-#     else:
-#         form = ProductForms()  # if request isn't POST we initialize an empty form
-#
-#     data = cartData(request)
-#     cartItems = data['cartItems']
-#
-#     context.update({
-#         'form': form,
-#         'cartItems': cartItems,
-#     })
-#     return render(request, 'store/form.html', context)
-
-
-# def productUpdate(request, id=id):
-#     if request.method == 'POST':
-#         instance = Product.objects.get(Product, id=id)
-#         form = ProductForms(request.POST or None, instance=instance)
-#         if request.method == 'POST':
-#             form = ProductForms(request.POST, instance=instance)
-#             if form.is_valid():
-#                 form.save()
-#                 # return HttpResponseRedirect(instance.get_absolute_url())
-#                 return redirect('/')
 
 def productUpdate(request, id=None):
     # 購物車購買數量
@@ -99,7 +57,7 @@ def productUpdate(request, id=None):
         # messages.error(request, 'ERROR!ERROR!')
         # messages.warning(request, 'Be careful!!!')
         messages.success(request,
-                         "<div id='msg' class='alert alert-success col-lg-12' role='alert'><strong>Success!</strong>Success Saved thank you for add join.</div>",
+                         "<div id='msg' class='alert alert-success col-lg-12' role='alert'><strong>Success!</strong>Success Saved for your edit.</div>",
                          extra_tags='html_safe')
         # messages.success(request, "<a href='#'><strong>疑問通知</strong></a> Success Saved thank you for add join", extra_tags='html_safe')
         # messages.success(request,"{% if messages %}<div class='row'><div class='col-sm-6 col-sm-offset-3'>{% for message in messages %}<div class='alert alert-{{ message.tags }} alert-dismissible fade show' role='alert'>{{ message }}<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>{% endfor %}</div></div>{% endif %}", extra_tags='html_safe')
@@ -116,14 +74,27 @@ def productUpdate(request, id=None):
     return render(request, 'store/form.html', context)
 
 
-def productDelete(request, id=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-    instance = get_object_or_404(Product, id=id)
-    instance.delete()
-    messages.success(request, "Successfully deleted")
-    return redirect("store:store")
+# def productDelete(request, id=None):
+#     if not request.user.is_staff or not request.user.is_superuser:
+#         raise Http404
+#     instance = get_object_or_404(Product, id=id)
+#     instance.delete()
+#     messages.success(request, "Successfully deleted")
+#     return redirect("store:store")
 
+def productDelete(request, id=None):
+    # if not request.user.is_staff or not request.user.is_superuser:
+    #     raise Http404
+    obj = get_object_or_404(Product, id=id)
+    # "POST" request
+    if request.method == "POST":
+        # confirming del
+        obj.delete()
+        return redirect('../../')
+    context = {
+        "object":obj
+    }
+    return render(request, 'store/delete.html', context)
 
 def productDetail(request, id=None):
     data = cartData(request)
@@ -158,9 +129,8 @@ def searchbar(request):
 
 
 # -----------------------------------------------------------
-
 def store(request):
-    products = Product.objects.all()  # .order_by("-timestamp")
+    products = Product.objects.filter(draft=False).filter(timestamp__lte=timezone.now())#all()  # .order_by("-timestamp")
 
     paginator = Paginator(products, 25)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
@@ -173,7 +143,6 @@ def store(request):
 
     except EmptyPage:
         queryset = paginator.page(paginator.num_pages)
-
     #
     data = cartData(request)
 

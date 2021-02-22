@@ -1,7 +1,14 @@
 body{
 	background-color: hsl(0, 0%, 98%);
 }
-
+*, ul, li, a{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    /*outline: red solid 1px;*/
+}
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
