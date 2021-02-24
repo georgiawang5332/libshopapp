@@ -18,18 +18,34 @@
                             <img class="thumbnail" src="{{ product.image.url }}">
                         {% endif %}
                         <div class="box-element product">
-                            {#                    <h6><strong><a href="{% url 'store:detail' id=product.id %}">{{ product.name }}</a></strong></h6>#}
-                            <h6><strong><a
-                                    href="{{ product.get_absolute_url }}">{{ product.name }}</a><small>{{ product.timestamp|timesince }}
-                                ago</small></strong></h6>
+                            {#<h6><strong><a href="{% url 'store:detail' id=product.id %}">{{ product.name }}</a></strong></h6>#}
+
+{#                            {% if product.draft %}<h3>Staff only: Draft</h3>{% endif %}#}
+{#                            {% if product.timestamp > today %}<h3>Staff Only: Future Post</h3>{% endif %}#}
+
+                            <h3>
+                                <a href='{{ products.get_absolute_url }}'>{{ products.name }}</a>
+                                <small>{{ products.timestamp }}</small>
+                            </h3>
+
+                            <h6>
+                                <strong>
+                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                    {% if product.draft %}
+                                        <h3>Staff only: Draft Future</h3>
+                                    {% endif %}
+                                    <small>{{ product.timestamp|timesince }} ago</small>
+
+                                </strong>
+                            </h6>
                             <hr>
                             <button data-product="{{ product.id }}" data-action="add"
                                     class="btn btn-outline-secondary add-btn update-cart">Add to Cart
                             </button>
 
-{#                            {% url "store:detail" id=product.id %}#}
+                            {# {% url "store:detail" id=product.id %} #}
                             <a class="btn btn-outline-success" href="{% url 'store:detail' id=product.id %}">View</a>
-                            {#                        <a class="btn btn-outline-success" href="{% url 'store:dd' %}">View</a>#}
+                            {# <a class="btn btn-outline-success" href="{% url 'store:dd' %}">View</a>#}
                             <h4 style="display: inline-block; float: right"><strong>${{ product.price }}</strong></h4>
 
                         </div>
@@ -44,6 +60,12 @@
                             <a href="?{{ page_reguest_var }}=
 
 
+
+
+
+
+
+
                                     {{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
                         {% endif %}
 
@@ -53,6 +75,12 @@
 
                         {% if object_list.has_next %}
                             <a href="?{{ page_reguest_var }}=
+
+
+
+
+
+
 
 
 

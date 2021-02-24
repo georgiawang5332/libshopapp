@@ -26,11 +26,8 @@ def images(instance, filename):
 
 
 User = settings.AUTH_USER_MODEL
-
-
 class Post(models.Model):
-    user = models.ForeignKey(User, default=1, db_constraint=False,
-                             on_delete=models.CASCADE)  # blank=True, null=True =>默認=1
+    user = models.ForeignKey(User, default=1, db_constraint=False, on_delete=models.CASCADE)  # blank=True, null=True =>默認=1
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True, null=False, max_length=10)
     img = models.ImageField(

@@ -29,9 +29,13 @@
                         {% endif %}
                         /posts/id
 
-                        <div class="caption">
-                            {% if obj.draft %}<h5>Staff Only: Draft</h5>{% if obj.publish > today %}
-                                <h5>STAFF ONLY: Future Post </h5> {% endif %}{% endif %}
+                        <div class="py">
+                            {% if obj.draft %}
+                                <h5>Staff Only: Draft</h5>
+                                {% if obj.publish > today %}
+                                    <h5>STAFF ONLY: Future Post </h5>
+                                {% endif %}
+                            {% endif %}
                             <h3>
                                 <a href="{{ obj.get_absolute_url }}">{{ obj.title|truncatechars:10 }}<br><small>{{ obj.publish }}ago</small></a>
                             </h3>

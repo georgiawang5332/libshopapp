@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 class ProductManage(models.Manager):
-    def all (self, *args, **kwargs):
+    def active (self, *args, **kwargs):
         # Product.objects.all() = super(PostManage, self).all()
         return super(ProductManage, self).filter(draft=False).filter(timestamp__lte=timezone.now())
 
@@ -26,7 +26,10 @@ class RegistrationData(models.Model):
     def __str__(self):
         return str(self.email)
 
+# User = settings.AUTH_USER_MODEL
 class Product(models.Model):
+    user = models.ForeignKey(User, default=1, db_constraint=False,
+                             on_delete=models.CASCADE)
     name     = models.CharField(max_length=200)
     content  = models.TextField(default='')
     price    = models.DecimalField(max_digits=7, decimal_places=2)

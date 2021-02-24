@@ -97,11 +97,17 @@ def productDelete(request, id=None):
     return render(request, 'store/delete.html', context)
 
 def productDetail(request, id=None):
-    data = cartData(request)
     instance = get_object_or_404(Product, id=id)
+    if instance.draft or instance.timestamp > timezone.now():
+        # 登入並且是員工狀況下，就會看到草稿中商品，如果不是員工則看不到。
+        if not request.user.is_staff or not request.user.is_superuser:
+            raise Http404
+
+    data = cartData(request)
     cartItems = data['cartItems']
 
     context = {
+        'name':instance.name,
         'instance': instance,
         'cartItems': cartItems
     }
@@ -130,7 +136,11 @@ def searchbar(request):
 
 # -----------------------------------------------------------
 def store(request):
-    products = Product.objects.filter(draft=False).filter(timestamp__lte=timezone.now())#all()  # .order_by("-timestamp")
+    today = timezone.now().date()
+    # products = Product.objects.filter(draft=False).filter(timestamp__lte=timezone.now())#all()  # .order_by("-timestamp")
+    products = Product.objects.active()
+    if request.user.is_staff or request.user.is_superuser:
+        products = Product.objects.all()
 
     paginator = Paginator(products, 25)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
@@ -156,6 +166,7 @@ def store(request):
         'page_obj': page_obj,
         'queryset': queryset,
         #
+        "today": today,
         'products': products,
         'cartItems': cartItems,
     }
