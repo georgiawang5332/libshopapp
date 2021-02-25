@@ -1,6 +1,6 @@
 {% extends 'store/main.html' %}
 {% load static %}
-<title>{% block head_title %} {{ instance.name }} | {{ block.super }}{% endblock %}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
+<title>{% block head_title %} {{ instance.name }} | {{ block.super }}{% endblock head_title%}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
 {% block content %}
 
     <h5 style="color: greenyellow"><br><br></h5>

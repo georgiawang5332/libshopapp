@@ -1,6 +1,6 @@
 {% extends 'store/main.html' %}
 {#{% load static %}#}
-{#<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
+{#<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock head_title %}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
 {% block content %}
     <div class="row">
         {% for product in products %}
