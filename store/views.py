@@ -33,6 +33,7 @@ def productCreate(request):
     cartItems = data['cartItems']
 
     context = {
+        'title': '建立商品',
         "form": form,
         'cartItems': cartItems,
     }
@@ -92,7 +93,8 @@ def productDelete(request, id=None):
         obj.delete()
         return redirect('../../')
     context = {
-        "object":obj
+        'title': '刪除商品',
+        "object":obj,
     }
     return render(request, 'store/delete.html', context)
 
@@ -126,6 +128,7 @@ def searchbar(request):
         # searchNum = Product.objects.all().count(number=searchNum)
 
         context = {
+            'title': '搜尋商品',
             'searchNum': searchNum,
             'product': product,
             'cartItems': cartItems
@@ -161,6 +164,7 @@ def store(request):
     items = data['items']
 
     context = {
+        'title':'商品首頁',
         # new
         'object_list': queryset,
         'page_obj': page_obj,

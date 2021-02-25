@@ -1,6 +1,5 @@
 {% extends "store/main.html" %}
-{% load static %}
-<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>
+
 {% block content %}
     <div class="container">
         <div class="row pt-5">
@@ -11,8 +10,8 @@
         <div class="row">
             <div class='col-sm-6'>
                 <h1>Form</h1>
-{#                <form method='post' action='{% url 'store:edit' id=instance.id %}'#}
-                <form method='POST' action=''{# {% url 'store:create' %} #}
+
+                <form method='post' action='{% url 'store:create' id=instance.id %}'
                       enctype='multipart/form-data'>{% csrf_token %}
                     {{ form.as_p }}
                     <button><input type='submit' class='btn btn-default' value='Create Post'/></button>

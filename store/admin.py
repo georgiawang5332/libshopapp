@@ -4,9 +4,9 @@ from store.models import *
 # Register your models here.
 class ProductModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'content', 'price', 'draft', 'digital', 'image', "updated", "timestamp"]
-    search_fields = ["name", "content"]
-    list_display_links = ["updated"]
+    list_display_links = ["content"]
     list_editable = ["name"]
+    search_fields = ["name", "content"]
     list_filter = ["updated", "timestamp"]
 
     class Meta:
