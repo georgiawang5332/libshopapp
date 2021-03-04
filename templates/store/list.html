@@ -1,6 +1,17 @@
 {% extends 'store/main.html' %}
 {#{% load static %}#}
 {#<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock head_title %}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
+<style>
+    {% block style %}
+        h1 {
+
+        }
+        .apple{
+
+        }
+    {% endblock style%}
+</style>
+
 {% block content %}
     <div class="row">
         {% for product in products %}
@@ -11,7 +22,9 @@
                 {% endif %}
                 <div class="box-element product">
                     {#                    <h6><strong><a href="{% url 'store:detail' id=product.id %}">{{ product.name }}</a></strong></h6>#}
-                    <h6><strong><a href="{{ product.get_absolute_url }}">{{ product.name }}</a><small>{{ product.timestamp|timesince }} ago</small></strong></h6>
+                    <h6><strong><a
+                            href="{{ product.get_absolute_url }}">{{ product.name }}</a><small>{{ product.timestamp|timesince }}
+                        ago</small></strong></h6>
                     <hr>
 
                     <button data-product="{{ product.id }}" data-action="add"
@@ -30,7 +43,9 @@
             <span class="step-links">
                 {% if object_list.has_previous %}
                     <a href="?{{ page_reguest_var }}=1">&laquo; first</a>
-                    <a href="?{{ page_reguest_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                    <a href="?{{ page_reguest_var }}=
+
+                            {{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
                 {% endif %}
 
                 <span class="current">

@@ -12,6 +12,7 @@ from .utils import cartData, guestOrder
 
 from django.utils import timezone
 
+
 def productCreate(request):
     # if not request.user.is_staff or not request.user.is_superuser:
     #     raise Http404
@@ -68,6 +69,7 @@ def productUpdate(request, id=None):
     #     messages.success(request, "<a href='#'>通知作者</a> 錯誤儲存 ", extra_tags='html_safe')
 
     context = {
+        'title':'商品編輯',
         'instance': instance,
         'form': form,
         'cartItems': cartItems,

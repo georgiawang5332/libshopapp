@@ -1,22 +1,28 @@
 {% extends 'store/main.html' %}
 {% load static %}
-<title>{% block head_title %} {{ instance.name }} | {{ block.super }}{% endblock head_title%}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
+<title>{% block head_title %} {{ instance.name }} | {{ block.super }}{% endblock head_title %}</title>
+{#商品名稱=instance.name | 公司名稱=block.super#}
 {% block content %}
 
     <h5 style="color: greenyellow"><br><br></h5>
-    <div class="col-sm-6">
-        {% if messages %}
-            <ul class="messages" style="list-style:none;">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        {% if "html_safe" in message.tags %} {{ message |safe }} {% else %}
-                            {{ message }} {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
+{#    <div class="col-sm-6">#}
+{#        {% if messages %}#}
+{#            <ul class="messages" style="list-style:none;">#}
+{#                {% for message in messages %}#}
+{#                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
+{#                        {% if "html_safe" in message.tags %} {{ message |safe }} {% else %}#}
+{#                            {{ message }} {% endif %}#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+{#    </div>#}
     <div class='col-sm-6 col-sm-offset-3'>
+
+        {% if instance.user.get_full_name %}
+            <p>Author : {{ instance.user.get_full_name }}</p>
+        {% endif %}
+
 
         {% if instance.image %}
             <img src="{{ instance.image.url }}" alt="" class="img-responsive">
