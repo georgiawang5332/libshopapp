@@ -1,7 +1,20 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-    <div class="row">
+
+    <div>
+        {% include 'store/popPage.html' %}
+    </div>
+
+    {#    <body onload="countDown()">#}
+    {#    <a href="#" class="big-link" data-reveal-id="myModal" data-animation="fade"> Fade 效果觸發點 </a>#}
+    {#    <input type="button" value="open pop login page"#}
+    {#           onclick="window.open('https://zh-tw.facebook.com/', '_blank',  'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')"/>#}
+    {# 'height=400', 'width=400'#}
+    {#    <a href="store:popPage" onclick="openwin()" id="myModal">open</a>#}
+
+    <div class="row reveal-modal">
+        {#<input type="text" readonly="true" value="5" id="time">#}
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
                 <form id="form">
@@ -69,6 +82,7 @@
         </div>
     </div>
 
+    {#    </body>#}
     {#	<script src="https://www.paypal.com/sdk/js?client-id=YOUR-CLIENT-ID&currency=USD&disable-funding=credit"></script>#}
     <script src="https://www.paypal.com/sdk/js?client-id=AXD8AOyWbvSQu5LJ4QiEIizM7Buz1D8jDsnpBGhLveKW6ZJL2xUj1krKrUnrTwMlqrbSO_oxB-RguRgh&currency=USD&disable-funding=credit"></script>
 
@@ -188,5 +202,19 @@
                     window.location.href = "{% url 'store:store' %}"
                 })
         }
+
+
+    </script>
+    <script>
+        $(function () {
+            $("#dialog").dialog();
+            {#setTimeout(() => $('#staticBackdrop').modal('show'), 2000);#}
+        })
+
+        {#$(function () {#}
+        {#window.open("store/popPage.html", "newwindow", "height=100, width=100, top=0, left=0,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")#}
+        {#    $('#staticBackdrop').reveal();#}
+        {# } #}
+
     </script>
 {% endblock content %}

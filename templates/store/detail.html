@@ -5,18 +5,18 @@
 {% block content %}
 
     <h5 style="color: greenyellow"><br><br></h5>
-{#    <div class="col-sm-6">#}
-{#        {% if messages %}#}
-{#            <ul class="messages" style="list-style:none;">#}
-{#                {% for message in messages %}#}
-{#                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
-{#                        {% if "html_safe" in message.tags %} {{ message |safe }} {% else %}#}
-{#                            {{ message }} {% endif %}#}
-{#                    </li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        {% endif %}#}
-{#    </div>#}
+    {#    <div class="col-sm-6">#}
+    {#        {% if messages %}#}
+    {#            <ul class="messages" style="list-style:none;">#}
+    {#                {% for message in messages %}#}
+    {#                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
+    {#                        {% if "html_safe" in message.tags %} {{ message |safe }} {% else %}#}
+    {#                            {{ message }} {% endif %}#}
+    {#                    </li>#}
+    {#                {% endfor %}#}
+    {#            </ul>#}
+    {#        {% endif %}#}
+    {#    </div>#}
     <div class='col-sm-6 col-sm-offset-3'>
 
         {% if instance.user.get_full_name %}
@@ -72,9 +72,15 @@
             </div>
         </div>
         <div class='col-sm-6 col-sm-offset-3'>
-            <a href="{% url 'store:update' id=instance.id %}">Edit/update Product</a><br>
-            <a href="{% url 'store:delete' id=instance.id %}">Del Product</a><br>
-            {#                <a href="{% url 'store:list' %}">Product</a><br>#}
+            FBook留言
+        </div>
+        <div class='col-sm-6 col-sm-offset-3'>
+            {% if user.is_staff %}
+                <a href="{% url 'store:update' id=instance.id %}">Edit/update Product</a><br>
+                <a href="{% url 'store:delete' id=instance.id %}">Del Product</a><br>
+                {#                <a href="{% url 'store:list' %}">Product</a><br>#}
+            {% endif %}
+
         </div>
     </div>
 

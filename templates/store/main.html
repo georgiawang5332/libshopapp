@@ -91,7 +91,8 @@
         </div>
 
         <div>
-            <form role="form" class="form-inline pl-3" action="{% url 'store:searchbar' %}" method="get">{% csrf_token %}
+            <form role="form" class="form-inline pl-3" action="{% url 'store:searchbar' %}"
+                  method="get">{% csrf_token %}
                 <input id="id_q" name="search" class="form-control mr-sm-2" type="search" placeholder="搜尋 Search"
                        aria-label="Search" value="{{ request.GET.q }}">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

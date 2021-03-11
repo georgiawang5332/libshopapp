@@ -1,14 +1,18 @@
 {% extends 'store/main.html' %}
 {% load static %}
-<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>{#商品名稱=instance.name | 公司名稱=block.super#}
+<title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>
+{#商品名稱=instance.name | 公司名稱=block.super#}
 
 {% block content %}
 
     <div class="container">
         <div class="row">
             {#            <a href="{% url 'store:create' %}">Create Post</a>#}
-            <a href="{% url 'store:create' %}">Create Post</a>
-            <br><br>
+            {% if user.is_staff %}
+                <button onclick="topFunction()" id="myBtn" class="myBtn" title="Go to Create">
+                    <a href="{% url 'store:create' %}">Create Post</a>
+                </button>
+            {% endif %}
         </div>
         {% if products != None and products != '' %}
             <div class="row">
@@ -22,8 +26,8 @@
                         <div class="box-element product">
                             {#<h6><strong><a href="{% url 'store:detail' id=product.id %}">{{ product.name }}</a></strong></h6>#}
 
-{#                            {% if product.draft %}<h3>Staff only: Draft</h3>{% endif %}#}
-{#                            {% if product.timestamp > today %}<h3>Staff Only: Future Post</h3>{% endif %}#}
+                            {#                            {% if product.draft %}<h3>Staff only: Draft</h3>{% endif %}#}
+                            {#                            {% if product.timestamp > today %}<h3>Staff Only: Future Post</h3>{% endif %}#}
 
                             <h3>
                                 <a href='{{ products.get_absolute_url }}'>{{ products.name }}</a>
@@ -68,6 +72,10 @@
 
 
 
+
+
+
+
                                     {{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
                         {% endif %}
 
@@ -77,6 +85,10 @@
 
                         {% if object_list.has_next %}
                             <a href="?{{ page_reguest_var }}=
+
+
+
+
 
 
 

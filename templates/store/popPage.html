@@ -1,0 +1,159 @@
+<head>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        {#$(function () {#}
+        {#    $("#dialog").dialog();#}
+        {# }); #}
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#dialog').modal('show');
+            }, 1000);
+        });
+    </script>
+</head>
+<style>
+    .modal.fade .modal-dialog {
+        transform: translateY(10vh);
+    }
+
+    .modal.show .modal-dialog {
+        transform: translateY(0);
+    }
+
+    {#設計#}
+    .container {
+        padding: 16px;
+    }
+
+    span {
+        float: right;
+        padding-top: 16px;
+    }
+
+    {#BTN DESIGN#}
+    input.input {
+        text-align: center;
+        background-color: #ECF0F1;
+        border: 2px solid transparent;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0;
+        width: 250px;
+        transition: border .5s;
+    }
+
+    .control-group {
+        margin-bottom: 10px;
+    }
+
+    .login-form {
+        text-align: center;
+    }
+
+    .btn {
+        border: 2px solid transparent;
+    {#background: #3498DB;#} background: #ed969e;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        display: block;
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    .btn:hover {
+        background-color: #2980B9;
+    }
+
+    .login-link {
+        font-size: 12px;
+        color: #444;
+        display: block;
+    {#margin-top: 12 px;#}
+    }
+
+    {#    溫馨提醒 設計#}
+    .footer {
+        font-size: 13px;
+        color: rgb(153, 153, 153);
+        padding-top: 10px;
+    }
+
+    .redFF5353 {
+        color: rgb(255, 83, 83);
+        float: none;
+    }
+
+    .remindYou {
+        line-height: 2;
+    {#border: 1px solid rgb(221, 221, 221);#} padding: 10px 30px;
+        color: rgb(153, 153, 153);
+    }
+
+</style>
+
+{% block content %}
+
+    <div class="modal fade bd-example-modal-lg" id="dialog" data-backdrop="static" tabindex="-1" role="dialog"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="staticBackdropLabel"><b>Login </b> <small>::請先登入::</small></h3>
+                </div>
+                <div class="modal-body active" id="popup-wrapper">
+                    <!--          -->
+                    <div class="container">
+                        <div class="login-form">
+                            <div class="control-group">
+                                <input type="text" class="login-field input" value="" placeholder="Enter Username"
+                                       name="uname" id="login-name" required>
+                                <label class="login-field-icon fui-user" for="login-name"></label><!--   uname  -->
+                            </div>
+                            <div class="control-group">
+                                <input type="password" class="login-field input" value="" placeholder="Enter Password"
+                                       id="login-pass" name="psw" required>
+                                <label class="login-field-icon fui-lock" for="login-pass"></label>
+                            </div>
+
+                            <!--           <a class="btn btn-primary btn-large btn-block" href="#">login</a> -->
+                            <!--           <div class="control-group">
+                                          <button type="submit">Login</button>
+                                      </div> -->
+
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </label>
+
+                            <a class="login-link" href="#">忘記密碼</a>
+                            <div class="login-link"><p class="">沒有申請帳號嗎? <a class="" href="#">SIGN UP</a></p></div>
+                            <button type="button" class="btn btn-primary">Login Btn</button>
+
+                        </div>
+                    </div>
+                    <!--          -->
+                </div>
+
+                <div class="modal-footer footer">
+                    <div class="remindYou">
+                        <span class="redFF5353">提醒您：</span>
+                        我們不會以電話或簡訊通知變更付款方式，也不會要您前往ATM進行任何操作。若有任何疑慮，請洽詢165反詐騙專線。
+                        如無須付款，請<a href="{% url 'store:store' %}"><b>返回首頁</b></a>。
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+

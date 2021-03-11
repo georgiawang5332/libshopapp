@@ -111,7 +111,7 @@ def productDetail(request, id=None):
     cartItems = data['cartItems']
 
     context = {
-        'name':instance.name,
+        'name': instance.name,
         'instance': instance,
         'cartItems': cartItems
     }
@@ -135,7 +135,6 @@ def searchbar(request):
             'product': product,
             'cartItems': cartItems
         }
-
         return render(request, 'store/searchbar.html', context)
 
 
@@ -166,7 +165,7 @@ def store(request):
     items = data['items']
 
     context = {
-        'title':'商品首頁',
+        'title': '商品首頁',
         # new
         'object_list': queryset,
         'page_obj': page_obj,
