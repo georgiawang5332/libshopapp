@@ -1,4 +1,8 @@
 /*login logout 畫面 start*/
+body {
+    background-color: #e1dcd9;
+}
+
 form.login {
     padding: 9vh 0 10vh 0;
 }

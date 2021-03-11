@@ -1,11 +1,12 @@
-{% extends "base_generic.html" %}
+{#{% extends 'base_generic.html'%} {#因為基本模板與django特別模板無法相互運用，再加上extands 無法崁入，只好這樣操作，請記得。 %}#}
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>base_gen 給不是特別需要畫面頁面</title>
+    <title>登入 | Ecom 公司</title>
+{#    <title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>#}
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -22,20 +23,20 @@
     {# index.css 修改畫面 #}
     <link rel="stylesheet" href="{% static 'home/style/css/login.css' %}">
 </head>
-<body style="background-color: #e1dcd9;">
+
 {% block content %}
-
-
     {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        {#        <p>Your username and password didn't match. Please try again.</p>#}
+        <p>您的用戶名和密碼不匹配。 請再試一遍。</p>
     {% endif %}
 
     {% if next %}
         {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-                please login with an account that has access.</p>
+            {#            <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>#}
+            <p>您的帳戶無權訪問此頁面。 繼續， 請使用具有訪問權限的帳戶登錄。</p>
         {% else %}
-            <p>Please login to see this page.</p>
+            {#            <p>Please login to see this page.</p>#}
+            <p>請登錄以查看此頁面。</p>
         {% endif %}
     {% endif %}
 
@@ -64,7 +65,7 @@
         <div id="right" class="w-100">
             <fieldset>
                 <!--<div class="fie">-->
-                <h1 class="lgd" style=" text-align:center;line-height:50px;">登入帳號</h1>
+                <h1 class="lgd" style=" text-align:center;line-height:50px;">登入</h1>
                 <hr>
                 <p>直接輸入您的 **** 會員帳號密碼登入網站</p>
                 <!--1--><label for="username">{{ form.username.label_tag }}</label><input type="text" id="username"
@@ -82,26 +83,30 @@
                 </div>
                 <!--4-->
                 <div id="extra_remember" class=""><!--rmbr-->
-                    <!--4.1--> <input type="checkbox" id="remberme" name="remberme" required>
+                    <!--4.1--> <input type="checkbox" checked="checked" id="remberme" name="remberme" required>
                     <!--4.2--> <label for="remberme" id="remberme0">記住我</label>
                 </div>
                 <div id="extra_operation"><!--sign-->
+                    {# Assumes you setup the password_reset view in your URLconf #}
                     <a href="{% url 'password_reset' %}" id="member_btn">忘記密碼?</a>
                     <a href="javascript:;" id="register">註冊</a>
                 </div>
                 <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p>
                 <div class="img_btn">
-{#                    <div style="width:100%; float: left">#}
+                    {#                    <div style="width:100%; float: left">#}
                     <div class="c_btn facebook-btn fb" style="width: 33.3%; text-align:center;line-height:1rem;">
-                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-facebook-square fa-3x"
+                                                  aria-hidden="true"></i></a>
                     </div>
                     <div class="c_btn google-btn go" style="width: 33.3%; text-align:center;line-height:1rem;">
-                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-google-plus-square fa-3x"
+                                                  aria-hidden="true"></i></a>
                     </div>
                     <div class="c_btn google-btn go" style="width: 33.3%; text-align:center;line-height:1rem;">
-                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+                        <a href="javascript:;"><i style="color: #756d6e" class="fa fa-instagram fa-3x"
+                                                  aria-hidden="true"></i></a>
                     </div>
-{#                        </div>#}
+                    {#                        </div>#}
                 </div>
                 <!--</div>-->
             </fieldset>
@@ -110,11 +115,6 @@
 
 
     {#    -------------------------------------------------------------------------------------------#}
-
-
-    {# Assumes you setup the password_reset view in your URLconf #}
-    {#    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
-
     {#    {% include 'home/footer.html' %}#}
 {% endblock %}
 
