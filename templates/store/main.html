@@ -82,7 +82,25 @@
         </ul>
 
         <div class="form-inline my-2 my-lg-0">
-            <a href="#" class="btn btn-warning">Login</a>
+{#            <a href="#" class="btn btn-warning">Login</a>#}
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <div class="info nav-link d-block" href="{% url 'logout' %}">
+                            &nbsp;&nbsp;hi,&nbsp;{{ user.get_username }}<a class="text-white logo" href="{% url 'logout' %}"><b>&nbsp;/登出</b>
+                            <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <div class="info nav-link d-block" href="{% url 'login' %}">
+                            hi&nbsp;Admin,&nbsp<a class="text-white logo"
+                                                  href="{% url 'login' %}"><b>登入</b>
+                            <i class="fa fa-sign-in fa-1x" aria-hidden="true"></i></a>
+                        </div>
+                    </li>
+                {% endif %}
+            </ul>
 
             <a href="{% url 'store:cart' %}">
                 <img id="cart-icon" src="{% static 'home/style/images/cart.png' %}">
