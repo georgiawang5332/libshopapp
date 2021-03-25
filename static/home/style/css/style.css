@@ -1,4 +1,8 @@
-*, ul, li, a{
+*{
+    /*outline: red solid 1px;*/
+}
+
+ul, li, a{
     box-sizing: border-box;
     margin: 0;
     padding: 0;

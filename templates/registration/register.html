@@ -1,0 +1,75 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block title %}
+    <h1>Create an Account</h1>
+{% endblock title %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+{% block content %}
+
+    {#    <form method="POST">#}
+    {#        {% csrf_token %}#}
+    {#        {{ form.as_p }}#}
+    {#        {% for field in form %}#}
+    {#            {{ field.errors }}#}
+    {#        {% endfor %}#}
+    {#        <button type="submit">註冊</button>#}
+    {#    </form>#}
+
+    {#    <form action="" method="POST">#}
+    {#        {% csrf_token %}#}
+    {#        註冊姓名:<input type="text" name="name">#}
+    {#        註冊密碼:<input type="password" name="password">#}
+    {#        {% for field in form %}#}
+    {#            {{ field.errors }}#}
+    {#        {% endfor %}#}
+    {#        <input type="submit" value="提交註冊">#}
+    {#    </form>#}
+
+    <div class="container py-5">
+        <div class="row mx-0 justify-content-center align-items-center w-100">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <h3 class="text-center">新(首次)會員註冊</h3>
+                <form class="form-group" action="{% url 'home:index' %}" method="POST">{% csrf_token %}
+                    {#{% url 'home:register' %}#}
+                    {#                        {{ form }}#}
+                    {#                        <button type="submit" class="btn btn-success">Register</button>#}
+                    {#                        {% for field in form %}#}
+                    {#                            {{ field.label_tag }}   <!--是相應控件的 label 標籤 (稱呼名字)-->#}
+                    {#                            {{ field }}             <!--是相應的表單控件 (輸入帳密號碼)-->#}
+                    {#                            {{ field.errors }}      <!--是表單的錯誤（如果有的話）-->#}
+                    {#                            {% if field.help_text %}#}
+                    {#                                <p class="help text-small text-muted">{{ field.help_text|safe }}</p> <!--是控件相關的幫助信息-->#}
+                    {#                            {% endif %}#}
+                    {#                        {% endfor %}#}
+                    <input type="text" name="first_name" placeholder="first_name"><br>
+                    <input type="text" name="last_name" placeholder="last_name"><br>
+                    <input type="text" name="username" placeholder="username"><br>
+                    <input type="email" name="email" placeholder="email"><br>
+                    <input type="password" name="password1" placeholder="password1"><br>
+                    <input type="password" name="password2" placeholder="confirm password"><br>
+                    <input type="submit">
+                    {#                        <button type="submit" class="btn btn-primary btn-block">提交註冊</button>#}
+                </form>
+                <div class="flex-center top-gap text-small">
+                    <a href="{% url 'login' %}">已有賬號登錄</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {#    <form action="">#}
+    {#        <label for="id_username">用戶名:</label><!-- 對應 {{ field.label_tag }} -->#}
+    {#        <input type="text" name="username" id="id_username" autofocus required maxlength="150"/><!-- 對應 {{ field }} -->#}
+    {#        <p class="help text-small text-muted">必填。150個字符或者更少。包含字母，數字和僅有的@/./+/-/_符號。</p><!-- 對應 {{ field.help_text }} -->#}
+    {#    </form>#}
+
+
+
+
+{% endblock content %}

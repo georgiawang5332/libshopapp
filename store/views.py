@@ -96,7 +96,7 @@ def productDelete(request, id=None):
         return redirect('../../')
     context = {
         'title': '刪除商品',
-        "object":obj,
+        "object": obj,
     }
     return render(request, 'store/delete.html', context)
 

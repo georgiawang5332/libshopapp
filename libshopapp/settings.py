@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build INSTALLED_APPS paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     #
     'rest_framework',
     'home',
@@ -137,5 +136,7 @@ MEDIA_ROOT = 'media/'
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 # Add to test email:
-EMAIL_BACKEND = 'django.posts.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.posts.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# CRISPY_TEMPLATE_PACK = "bootstrap4"

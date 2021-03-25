@@ -1,17 +1,10 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-
+    {#跳出視窗並解登入會員購買商品#}
     <div>
         {% include 'store/popPage.html' %}
     </div>
-
-    {#    <body onload="countDown()">#}
-    {#    <a href="#" class="big-link" data-reveal-id="myModal" data-animation="fade"> Fade 效果觸發點 </a>#}
-    {#    <input type="button" value="open pop login page"#}
-    {#           onclick="window.open('https://zh-tw.facebook.com/', '_blank',  'height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')"/>#}
-    {# 'height=400', 'width=400'#}
-    {#    <a href="store:popPage" onclick="openwin()" id="myModal">open</a>#}
 
     <div class="row reveal-modal">
         {#<input type="text" readonly="true" value="5" id="time">#}
@@ -205,16 +198,10 @@
 
 
     </script>
-    <script>
-        $(function () {
-            $("#dialog").dialog();
-            {#setTimeout(() => $('#staticBackdrop').modal('show'), 2000);#}
-        })
-
-        {#$(function () {#}
-        {#window.open("store/popPage.html", "newwindow", "height=100, width=100, top=0, left=0,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no")#}
-        {#    $('#staticBackdrop').reveal();#}
-        {# } #}
-
-    </script>
+{#    <script>#}
+{#        $(function () {#}
+{#            $("#dialog").dialog();#}
+{#        })#}
+{##}
+{#    </script>#}
 {% endblock content %}

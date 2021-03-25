@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>登入 | Ecom 公司</title>
-{#    <title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>#}
+    {#    <title>{% block head_title %} {{ title }} | {{ block.super }}{% endblock %}</title>#}
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,11 +23,23 @@
     {# index.css 修改畫面 #}
     <link rel="stylesheet" href="{% static 'home/style/css/login.css' %}">
 </head>
-
+<style>
+    .container {
+        background: #fff6dc;
+        border-radius: 3px;
+    }
+</style>
 {% block content %}
     {% if form.errors %}
         {#        <p>Your username and password didn't match. Please try again.</p>#}
-        <p>您的用戶名和密碼不匹配。 請再試一遍。</p>
+        <div class="container img-circle">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>注意: </strong> 您的用戶名和密碼不匹配。 請再試一遍。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
     {% endif %}
 
     {% if next %}
@@ -89,7 +101,7 @@
                 <div id="extra_operation"><!--sign-->
                     {# Assumes you setup the password_reset view in your URLconf #}
                     <a href="{% url 'password_reset' %}" id="member_btn">忘記密碼?</a>
-                    <a href="javascript:;" id="register">註冊</a>
+                    <a href="{% url 'home:register' %}" id="register">&nbsp;還沒有註冊嗎?</a>
                 </div>
                 <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p>
                 <div class="img_btn">

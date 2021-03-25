@@ -1,7 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<p>Logged out!</p>  
-
-<a href="{% url 'login'%}">Click here to login again.</a>
+    <div class="container">
+        <div class="row">
+            <div class="text-center vw-100">
+                <p class="h-100 m-4">
+                <h1 class="h-50 p-3" style="background: #fff6dc;">登出成功!</h1></p>
+                <p>如要返回登入，請點擊這裡<a href="{% url 'login' %}" class="text-decoration-none font-weight-bold">再次登錄</a></p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

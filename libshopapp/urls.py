@@ -29,9 +29,10 @@ urlpatterns = [
 
 #Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [
-    path('api-auth/', include('rest_framework.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api-auth/', include('rest_framework.urls'), name='auth'),
+    path('accounts/', include('django.contrib.auth.urls'), name='register'),
+    # path('accounts/', include('accounts.urls')),  # new 20210323
+               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -86,7 +86,8 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <div class="info nav-link d-block" href="{% url 'logout' %}">
-                            &nbsp;&nbsp;hi,&nbsp;{{ user.get_username }}<a class="text-white logo" href="{% url 'logout' %}"><b>&nbsp;/登出</b>
+                            &nbsp;&nbsp;hi,&nbsp;{{ user.get_username }}<a class="text-white logo"
+                                                                           href="{% url 'logout' %}"><b>&nbsp;/登出</b>
                             <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </div>
                     </li>
@@ -99,6 +100,7 @@
                         </div>
                     </li>
                 {% endif %}
+
             </ul>
 
             <a href="{% url 'store:cart' %}">
