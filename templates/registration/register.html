@@ -34,7 +34,8 @@
         <div class="row mx-0 justify-content-center align-items-center w-100">
             <div class="unit-1-2 unit-1-on-mobile">
                 <h3 class="text-center">新(首次)會員註冊</h3>
-                <form class="form-group" action="{% url 'home:index' %}" method="POST">{% csrf_token %}
+                <form method="POST">{% csrf_token %}
+                    {#<form class="form-group" action="{% url 'home:index' %}" method="POST">{% csrf_token %}#}
                     {#{% url 'home:register' %}#}
                     {#                        {{ form }}#}
                     {#                        <button type="submit" class="btn btn-success">Register</button>#}

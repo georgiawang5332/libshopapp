@@ -5,33 +5,21 @@
 
 {% block content %}
 
-    {#    <form action="" method="POST">#}
-    {#        {% csrf_token %}#}
-    {#        姓:<input type="text" name="first_name" placeholder="First Name">#}
-    {#        名字:<input type="text" name="last_name" placeholder="Last Name">#}
-    {#        註冊姓名:<input type="text" name="username" placeholder="User Name">#}
-    {#        註冊姓名:<input type="email" name="email" placeholder="Email">#}
-    {#        註冊密碼:<input type="password" name="password1" placeholder="Password">#}
-    {#        註冊姓名:<input type="password" name="password2" placeholder="Confirm password">#}
-    {##}
-    {#        {% for field in form %}#}
-    {#            {{ field.errors }}#}
-    {#        {% endfor %}#}
-    {#        <input type="submit" value="提交註冊">#}
-    {#    </form>#}
     <div class="container py-5">
         <div class="row mx-0 justify-content-center align-items-center w-100">
             <div class="unit-1-2 unit-1-on-mobile">
                 <h3 class="text-center">新(首次)會員註冊</h3>
                 <form method="POST">{% csrf_token %}
-{#                <form class="form-group" action="{% url 'home:index' %}" method="POST"> views.py 裡面有所以這邊就不要使用了#}
+                    {#                <form class="form-group" action="{% url 'home:index' %}" method="POST"> views.py 裡面有所以這邊就不要使用了#}
                     {{ form.as_p }}
                     {% for field in form %}
                         {{ field.errors }}
                     {% endfor %}
                     <button type="submit">送出</button>
                 </form>
-
+                <div class="flex-center top-gap text-small">
+                    <a href="{% url 'login' %}">已有賬號登錄</a>
+                </div>
             </div>
         </div>
     </div>
