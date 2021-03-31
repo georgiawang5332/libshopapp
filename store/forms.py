@@ -1,6 +1,6 @@
 from django import forms
 
-from store.models import Product, RegistrationData
+from .models import Product, RegistrationData
 
 
 class ProductForms(forms.ModelForm):

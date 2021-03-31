@@ -7,7 +7,7 @@ from django.http import JsonResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ProductForms
-from .models import *
+from store.models import *
 from .utils import cartData, guestOrder
 
 from django.utils import timezone

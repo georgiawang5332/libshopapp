@@ -1,5 +1,5 @@
 {% extends 'base_generic.html' %}
-{% load static %}
+{#{% load static %}#}
 
 {% block title %}
     <h1>Create an Account</h1>
@@ -54,7 +54,7 @@
                     <input type="password" name="password1" placeholder="password1"><br>
                     <input type="password" name="password2" placeholder="confirm password"><br>
                     <input type="submit">
-                    {#                        <button type="submit" class="btn btn-primary btn-block">提交註冊</button>#}
+                    {# <button type="submit" class="btn btn-primary btn-block / btn btn-lg btn-danger outline">提交註冊</button>#}
                 </form>
                 <div class="flex-center top-gap text-small">
                     <a href="{% url 'login' %}">已有賬號登錄</a>
