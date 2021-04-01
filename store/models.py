@@ -199,117 +199,117 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
 
-#獨立開個APP自行管理
-# Django signals for beginners | How to use signals in Django : https://www.youtube.com/watch?v=W8MLlwvSS-U
-# 其實這些東西就是幫忙您自動跳出數字或是亂碼讓您登入這樣，一切都轉為自動的很方便。
-
-buyers: user -> buyer, post_save
-cars  : car -> buyer, post_save vs pre_save, pre_save vs save
-orders: order, m2m_changed, order->sale, post_save
-sales : sale -> order, pre_delete
-
--buyers APP:
--Car APP:
--sales APP:
-
-admin.py
-from .models import Sale
-admin.site.register(Sale)
-
-models.py
-class Sale(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    amount = models.PositiveIntegerField(blank=True, null=True)
-    def __str__(self):
-        return str(self.amount)
-
--Order APP:
-
-Order models:
-from django.db import models
-from cars.models import Car
-
-class Order(models.Model):
-    name  = models.CharField(max_length=200)
-    cars  = models.ManyToManyField(Car)
-    total = models.PositiveImtegerField(blank=True, null=True)
-    total_price = models.PositiveImtegerField(blank=True, null=True)
-    active = models.BooleanField(default=True)
-    def __str__(self):
-        return str(self.name)
-
-Order admin:
-from django.contrib import admin
-from cars.models import Order
-
-admin.site.register(Order)
-
-Order apps:
-from django.apps import AppConfig
-
-class OrdersConifig(AppConfig):
-    name = 'orders'
-    def ready(self):
-        import orders.signals
-
-OrdersConifig __init__:
-default_app_config='orders.app.OrdersConifig'
-
-Orders signals
-from django.db.models.signals import m2m_changed
-from django.dispatch import receiver
-from (cars).models import Order
-from (sales).models import Sale
-
-# Order:  order, m2m_changed
-@receiver(m2m_changed, sender=Order.cars.through)
-def m2m_changed_cars_irder(sender, instance, action, **kwargs):
-    # first
-    # print('running...')
-    # print(action)         #避免混淆，所以先找出action中重複性質東西讓他2選1
-    total = 0
-    total_price = 0
-    if action == "post_add" or action == "post_remove":
-        #同上，因為會有manytomanyfield多選項發生，所以要了解action中的 add or remove問題，因為有時候會改為
-        # 一個有時候我想選其他台車，所以金額數量都會做更動，此時signals - m2m_changed就會幫我們解決此問題。
-        for car in instance.cars.all():
-            # second
-            print('running...')
-            print(action)
-            total += 1
-            total_price += car.price
-        instance.total = total
-        instance.total_price = total_price
-        instance.save()
-# Sales : order->sale, post_save
-@receiver(post_save, sender=Order)
-def post_save_create_or_updated_sale(sender, instance, created, update_fields, **kwargs):
-    obj, _ = Sale.objects.get_or_create(order=instance) #訂單是發件人的實例銷售
-    obj.amount = instance.total_price
-    obj.save()#post_save 需要 obj.save()
-
-apps.py
-# 寫下我們已準備方法，在這裡我們教要導入銷售信號。# 售價會關係到sales中價位，要有關聯就得要改變添加apps產生信號signals。
-class SalesConfig(AppConfig):
-    name='sales'
-    def ready(self):
-        import sales.signals #這邊是在說明，我要開啟 signals.py 的意思，然後去創建signals.py這樣。
-
-__init__.py
-#在進入此 默認程序配置，有點像setting 配置 APP一樣操作。
-default_app_config='sale.apps.SalesConfig' #轉道信號signals 開通信號
-
-signals.py
-
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
-from .models import Sale
-from orders.models import Order
-
-@receiver(pre_delete, sender=Sale)
-def pre_delete_change_active_order(sender, instance, **kwargs):
-    obj = instance.order #他說是找Sale中的order ForeKey相關連的資訊。#然後還可以回到此Order活動段
-    obj.active = False #然後還可以回到此Order活動段
-    obj.save()
-    # 所以我們一但進行銷售，刪除他，訂單就不再有效了，最後保存。
-    # 參考資料Django signals for beginners | How to use signals in Django
+# #獨立開個APP自行管理
+# # Django signals for beginners | How to use signals in Django : https://www.youtube.com/watch?v=W8MLlwvSS-U
+# # 其實這些東西就是幫忙您自動跳出數字或是亂碼讓您登入這樣，一切都轉為自動的很方便。
+#
+# buyers: user -> buyer, post_save
+# cars  : car -> buyer, post_save vs pre_save, pre_save vs save
+# orders: order, m2m_changed, order->sale, post_save
+# sales : sale -> order, pre_delete
+#
+# -buyers APP:
+# -Car APP:
+# -sales APP:
+#
+# admin.py
+# from .models import Sale
+# admin.site.register(Sale)
+#
+# models.py
+# class Sale(models.Model):
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+#     amount = models.PositiveIntegerField(blank=True, null=True)
+#     def __str__(self):
+#         return str(self.amount)
+#
+# -Order APP:
+#
+# Order models:
+# from django.db import models
+# from cars.models import Car
+#
+# class Order(models.Model):
+#     name  = models.CharField(max_length=200)
+#     cars  = models.ManyToManyField(Car)
+#     total = models.PositiveImtegerField(blank=True, null=True)
+#     total_price = models.PositiveImtegerField(blank=True, null=True)
+#     active = models.BooleanField(default=True)
+#     def __str__(self):
+#         return str(self.name)
+#
+# Order admin:
+# from django.contrib import admin
+# from cars.models import Order
+#
+# admin.site.register(Order)
+#
+# Order apps:
+# from django.apps import AppConfig
+#
+# class OrdersConifig(AppConfig):
+#     name = 'orders'
+#     def ready(self):
+#         import orders.signals
+#
+# OrdersConifig __init__:
+# default_app_config='orders.app.OrdersConifig'
+#
+# Orders signals
+# from django.db.models.signals import m2m_changed
+# from django.dispatch import receiver
+# from (cars).models import Order
+# from (sales).models import Sale
+#
+# # Order:  order, m2m_changed
+# @receiver(m2m_changed, sender=Order.cars.through)
+# def m2m_changed_cars_irder(sender, instance, action, **kwargs):
+#     # first
+#     # print('running...')
+#     # print(action)         #避免混淆，所以先找出action中重複性質東西讓他2選1
+#     total = 0
+#     total_price = 0
+#     if action == "post_add" or action == "post_remove":
+#         #同上，因為會有manytomanyfield多選項發生，所以要了解action中的 add or remove問題，因為有時候會改為
+#         # 一個有時候我想選其他台車，所以金額數量都會做更動，此時signals - m2m_changed就會幫我們解決此問題。
+#         for car in instance.cars.all():
+#             # second
+#             print('running...')
+#             print(action)
+#             total += 1
+#             total_price += car.price
+#         instance.total = total
+#         instance.total_price = total_price
+#         instance.save()
+# # Sales : order->sale, post_save
+# @receiver(post_save, sender=Order)
+# def post_save_create_or_updated_sale(sender, instance, created, update_fields, **kwargs):
+#     obj, _ = Sale.objects.get_or_create(order=instance) #訂單是發件人的實例銷售
+#     obj.amount = instance.total_price
+#     obj.save()#post_save 需要 obj.save()
+#
+# apps.py
+# # 寫下我們已準備方法，在這裡我們教要導入銷售信號。# 售價會關係到sales中價位，要有關聯就得要改變添加apps產生信號signals。
+# class SalesConfig(AppConfig):
+#     name='sales'
+#     def ready(self):
+#         import sales.signals #這邊是在說明，我要開啟 signals.py 的意思，然後去創建signals.py這樣。
+#
+# __init__.py
+# #在進入此 默認程序配置，有點像setting 配置 APP一樣操作。
+# default_app_config='sale.apps.SalesConfig' #轉道信號signals 開通信號
+#
+# signals.py
+#
+# from django.db.models.signals import pre_delete
+# from django.dispatch import receiver
+# from .models import Sale
+# from orders.models import Order
+#
+# @receiver(pre_delete, sender=Sale)
+# def pre_delete_change_active_order(sender, instance, **kwargs):
+#     obj = instance.order #他說是找Sale中的order ForeKey相關連的資訊。#然後還可以回到此Order活動段
+#     obj.active = False #然後還可以回到此Order活動段
+#     obj.save()
+#     # 所以我們一但進行銷售，刪除他，訂單就不再有效了，最後保存。
+#     # 參考資料Django signals for beginners | How to use signals in Django
