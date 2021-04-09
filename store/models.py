@@ -86,6 +86,14 @@ class Product(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+        # 這些事他可以用東西 UserCreateFrom:https://devjunior.com/blog/11/
+        # model = CustomUser
+        # fields = ['username', 'email', 'first_name', 'last_name', 'description', ]
+        # widgets = {
+        #     'description': forms.Textarea(attrs={'rows': 3}),
+        #     'username': forms.TextInput(attrs={'readonly': 'readonly'}),
+        #     'email': forms.TextInput(attrs={'readonly': 'readonly'})
+        # }
 
 # 20210330 Defining and sending signals 添加 pre_save & post_save or pre_del & post_del 等 https://docs.djangoproject.com/en/3.1/ref/signals信號/
 @receiver(pre_save, sender=Product)

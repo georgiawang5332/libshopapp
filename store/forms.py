@@ -36,23 +36,23 @@ class RegistrationModelProductForm(forms.Form):
     )
     price = forms.DecimalField(initial=199.99)
 
-    class Meta:
-        model = RegistrationData
-        fields = [
-            'email',
-        ]
-        widgets = {
-            'email':forms.TextInput(attrs={
-                'class':'form-control',
-                'placeholder':'email',
-            }),
-        }
-    def clean_email(self, *args, **kwargs):
-        email = self.clean_data.get("email")
-        if not email.endswith("gmail"):
-            raise forms.ValidationError("this is not a valid email")
-        return email
-
+    # class Meta:
+    #     model = RegistrationData
+    #     fields = [
+    #         'email',
+    #     ]
+    #     widgets = {
+    #         'email':forms.TextInput(attrs={
+    #             'class':'form-control',
+    #             'placeholder':'email',
+    #         }),
+    #     }
+    # def clean_email(self, *args, **kwargs):
+    #     email = self.clean_data.get("email")
+    #     if not email.endswith("gmail"):
+    #         raise forms.ValidationError("this is not a valid email")
+    #     return email
+    #
     # def clean_title(self, *args, **kwargs):
     #     title = self.clean_data.get("title")
     #     if "CEF" in title:

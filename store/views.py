@@ -9,7 +9,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductForms
 from store.models import *
 from .utils import cartData, guestOrder
-
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    PasswordChangeForm,
+)
 from django.utils import timezone
 
 
@@ -27,7 +31,7 @@ def productCreate(request):
                          extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
     # else:
-        # messages.error(request, "Not successfully Created")
+    # messages.error(request, "Not successfully Created")
 
     # 購物車購買數量
     data = cartData(request)
@@ -69,7 +73,7 @@ def productUpdate(request, id=None):
     #     messages.success(request, "<a href='#'>通知作者</a> 錯誤儲存 ", extra_tags='html_safe')
 
     context = {
-        'title':'商品編輯',
+        'title': '商品編輯',
         'instance': instance,
         'form': form,
         'cartItems': cartItems,
@@ -77,7 +81,48 @@ def productUpdate(request, id=None):
     return render(request, 'store/form.html', context)
 
 
+# def productUpdate(request, id=None):
+#     # 購物車購買數量
+#     data = cartData(request)
+#     cartItems = data['cartItems']
+#
+#     if request.method == 'POST':
+#         form = EditProfileForm(request.POST, instance=request.user)
+#
+#     instance = get_object_or_404(Product, id=id)
+#     form = ProductForms(request.POST or None, instance=instance)
+#     if form.is_valid():
+#         instance = form.save(commit=False)
+#         instance.save()
+#         messages.success(request,
+#                          "<div id='msg' class='alert alert-success col-lg-12' role='alert'><strong>Success!</strong>Success Saved for your edit.</div>",
+#                          extra_tags='html_safe')
+#         return HttpResponseRedirect(instance.get_absolute_url())
+#
+#     context = {
+#         'title': '商品編輯',
+#         'instance': instance,
+#         'form': form,
+#         'cartItems': cartItems,
+#     }
+#     return render(request, 'store/changePassword.html', context)
+#
+
+# 更改密碼 PasswordChangeForm
+# def changePassword(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.POST, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('account/profile')
+#         else:
+#             #是密碼更改表單
+#             form = PasswordChangeForm()
+
+
 # def productDelete(request, id=None):
+
+
 #     if not request.user.is_staff or not request.user.is_superuser:
 #         raise Http404
 #     instance = get_object_or_404(Product, id=id)
@@ -99,6 +144,7 @@ def productDelete(request, id=None):
         "object": obj,
     }
     return render(request, 'store/delete.html', context)
+
 
 def productDetail(request, id=None):
     instance = get_object_or_404(Product, id=id)

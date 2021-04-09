@@ -137,6 +137,7 @@ MEDIA_ROOT = 'media/'
 LOGIN_REDIRECT_URL = '/'
 # Add to test email:
 # EMAIL_BACKEND = 'django.posts.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FILE_PATH = str(BASE_DIR.join('sent_emails'))
 
 # CRISPY_TEMPLATE_PACK = "bootstrap4"

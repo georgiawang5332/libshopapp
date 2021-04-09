@@ -13,6 +13,7 @@ urlpatterns = [
     path('create/', views.productCreate, name='create'),
     path('<int:id>/', views.productDetail, name='detail'),
     path('<int:id>/update/', views.productUpdate, name='update'),
+    # path('changePassword/', views.changePassword, name='changePassword'),
     path('<int:id>/delete/', views.productDelete, name='delete'),
 
     path('checkout/', views.checkout, name='checkout'),
@@ -22,4 +23,8 @@ urlpatterns = [
     path('process_order/', views.processOrder, name='process_order'),
 
     path('searchbar/', views.searchbar, name='searchbar'),
+
+
+
+
 ]

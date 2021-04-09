@@ -19,11 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.contrib.auth import views
+from home.views import secretPage
+
 urlpatterns = [
     path('store/', include('store.urls', namespace='store')),
     path('posts/', include('posts.urls', namespace='posts')),
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # app_name # 後台
 
@@ -32,6 +36,19 @@ urlpatterns += [
     path('api-auth/', include('rest_framework.urls'), name='auth'),
     path('accounts/', include('django.contrib.auth.urls'), name='register'),
     # path('accounts/', include('accounts.urls')),  # new 20210323
+
+                   # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
+                   # 參考資料: https://github.com/mitchtabian/CodingWithMitch-Blog-Course/blob/Reset-Password-and-Change-Password-(Django)/src/mysite/urls.py
+                   path('password_change/', views.PasswordChangeView.as_view(), name='password_change'),
+                   path('password_change/done/', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+
+                   path('password_reset/', views.PasswordResetView.as_view(), name='password_reset'),  # 寫信箱郵件
+                   path('password_reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),#我們已通過電子郵件發送給您有關設置密碼的說明。 如果幾分鐘後還沒到達，請檢查您的垃圾郵件文件夾。
+                   path('reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(),
+                        name='password_reset_confirm'),
+                   path('reset/done/', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),#密碼已更改！
+                   # path("secretPage/", views.secretPage.as_view(), name="secretPage"),  # 20210408
+
                ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

@@ -7,6 +7,9 @@ from .forms import RegisterForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate
 
+def secretPage(request):
+    context = {}
+    return render(request, 'registration/secretPage.html', context)
 
 def register(request): #20210325
     if request.method == 'POST':
@@ -35,7 +38,6 @@ def register(request): #20210325
         form = RegisterForm()
         context = {'form': form}
         return render(request, 'registration/signup.html', context)
-
 
 @csrf_protect
 def index(request):
