@@ -135,9 +135,19 @@ MEDIA_ROOT = 'media/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
 # Add to test email:
 # EMAIL_BACKEND = 'django.posts.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_FILE_PATH = str(BASE_DIR.join('sent_emails'))
 
-# CRISPY_TEMPLATE_PACK = "bootstrap4"
+# SMTP Configuration 簡單郵件傳輸通訊協定 -> 基本上要我們知道我要使用哪封電子郵件
+# EMAIL_FILE_PATH = str(BASE_DIR.join('sent_emails'))
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587 #有寫 EMAIL_USE_SSL 就變成 => 465
+# 發件人郵件
+EMAIL_HOST_USER = 'georgiawang5332@gmail.com'
+EMAIL_HOST_PASSWORD = '0704gta93julro'
+# EMAIL_USE_SSL = True
+
