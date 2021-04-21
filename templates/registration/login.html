@@ -85,7 +85,7 @@
                                                                                           name="username"
                                                                                           placeholder="使用者名稱" required>
                 <br>
-                <!--2--><label for="password">{{ form.password.label_tag }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input
+                <!--2--><label for="password">{{ form.password.label_tag }}</label><input
                     type="password" id="password" class="password1" name="password" placeholder="密碼" required>
                 <br>
                 {#              <!--3--><input type="button" value="登入" class="btn btn-dark float-right text-lg-center" id="submit" onclick="myFormCheck()"/>#}
@@ -100,7 +100,7 @@
                 </div>
                 <div id="extra_operation"><!--sign-->
                     {# Assumes you setup the password_reset view in your URLconf #}
-                    <a href="{% url 'home:secretPage' %}">secret page</a> {#參考資料: https://www.youtube.com/watch?v=o0nvMYxBpRo&list=PLLxk3TkuAYnryu1lEcFaBr358IynT7l7H&index=7#}
+{#                    <a href="{% url 'home:secretPage' %}">secret page</a> {#參考資料: https://www.youtube.com/watch?v=o0nvMYxBpRo&list=PLLxk3TkuAYnryu1lEcFaBr358IynT7l7H&index=7#}
                     <a href="{% url 'password_reset' %}" id="member_btn">忘記密碼?</a>
                     <a href="{% url 'home:register' %}" id="register">&nbsp;還沒有註冊嗎?</a>
                 </div>

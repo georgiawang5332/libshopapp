@@ -37,14 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #
     'rest_framework',
+    # 'home.apps.HomeConfig',
     'home',
     'posts',
     'store',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # SSL重定向,頂部附近，因為這樣可以避免運行大量其他不必要的中間件。
+    'django.contrib.sessions.middleware.SessionMiddleware',  #
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -145,9 +146,12 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587 #有寫 EMAIL_USE_SSL 就變成 => 465
+EMAIL_PORT = 587  # 有寫 EMAIL_USE_SSL 就變成 => 465
 # 發件人郵件
 EMAIL_HOST_USER = 'georgiawang5332@gmail.com'
 EMAIL_HOST_PASSWORD = '0704gta93julro'
 # EMAIL_USE_SSL = True
 
+# sending emails: https://stackoverflow.com/questions/5802189/django-errno-111-connection-refused
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025

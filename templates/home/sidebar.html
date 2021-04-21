@@ -27,6 +27,8 @@
                             <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </div>
                     </li>
+                    <li class="nav-item"><a href="{% url 'home:change_password' %}">更改密碼</a></li>
+
                 {% else %}
                     <li class="nav-item">
                         <div class="info nav-link d-block" href="{% url 'login' %}">

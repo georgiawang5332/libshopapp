@@ -2,7 +2,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.conf import settings
 from django.db.models.signals import (
-    pre_save, #那是預先保存好的，所以預先保存很像後期保存
+    pre_save,  # 那是預先保存好的，所以預先保存很像後期保存
     post_save,
 )
 
@@ -11,13 +11,24 @@ from django.db.models.signals import (
 # test 03/30/2021
 User = settings.AUTH_USER_MODEL
 
+
+class LoggedInUser(models.Model):
+    user = models.OneToOneField(User, related_name='logged_in_user', on_delete=models.CASCADE)
+    session_key = models.CharField(max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
 @receiver(pre_save, sender=User)
 def user_pre_save_receiver(sender, instance, *args, **kwargs):
     """
     before saved in the database
     """
     # print(args, kwargs)
-    print(instance.username, instance.id) #None
+    print(instance.username, instance.id)  # None
+
+
 #     trigger pre_save
 #     instance.save() # <-- DONT DO　THIS -> 加了save 就出現錯誤但是可以單一加入pre_save and post_save 2選1
 #     trigger post_save
